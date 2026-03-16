@@ -19,8 +19,12 @@ public class Facebookpage{
         driver.findElement(By.xpath("//a[@role='link'][1]")).click();
         Thread.sleep(3000);
 // Get page title
-String title = driver.getTitle();
+//String title = driver.getTitle();
 // Print title
-System.out.println("Page Title is: " + title);
+//System.out.println("Page Title is: " + title);
+
+String heading = driver.findElement(By.xpath("//span[contains(@class,'x1cpjm7i')][1]")).getText();
+System.out.println(heading);
+
   }
 }
