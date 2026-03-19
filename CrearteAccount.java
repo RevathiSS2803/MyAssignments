@@ -2,11 +2,16 @@ package orrg.study.org.week3;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 public class CrearteAccount {
   public static void main(String[] args) throws InterruptedException {
 // Step 1: Instantiate the Browser driver
-        ChromeDriver driver = new ChromeDriver();
+        
+        ChromeOptions opt = new ChromeOptions();
+		opt.addArguments("guest");
+		
+		ChromeDriver driver = new ChromeDriver(opt);
  // Step 2: Load the URL
         driver.get("http://leaftaps.com/opentaps/");
 // Step 3: Maximize the browser
@@ -27,25 +32,30 @@ public class CrearteAccount {
         driver.findElement(By.xpath("//a[contains(@href,'AccountForm')][1]")).click();
          System.out.println("Click createAccount");
 
-         driver.findElement(By.xpath("//span[@class='requiredField']")).sendKeys("Revathitestleaf");
-         driver.findElement(By.xpath("//span[text()='Description']")).sendKeys("Selenium Automation Tester");
-         WebElement industry = driver.findElement(By.xpath("//span[text()=Industry"));
+         driver.findElement(By.xpath("//input[@id = 'accountName']")).sendKeys("Revathitestleaf");
+         System.out.println("AccountNAme");
+         //WebElement Acc = driver.findElement(By.xpath("//span[@class = 'requiredField']"));
+         //System.out.println("Acc");
+         
+         driver.findElement(By.xpath("//textarea[@name = 'description']")).sendKeys("Selenium Automation Tester");
+         WebElement industry = driver.findElement(By.xpath("//select[@name = 'industryEnumId']"));
 // create Select object
 Select dropDown = new Select(industry);
 // select the 3rd option (index starts from 0)
 dropDown.selectByIndex(2);
-WebElement ownership = driver.findElement(By.xpath("//span[text()='Ownership']"));
+WebElement ownership = driver.findElement(By.xpath("//select[@name ='ownershipEnumId']"));
 Select ownerDrop = new Select(ownership);
 ownerDrop.selectByVisibleText("S-Corporation");
-WebElement Source = driver.findElement(By.xpath("//span[text()='Source']"));
+WebElement Source = driver.findElement(By.xpath("//select[@name='dataSourceId']"));
 Select sourcedrop = new Select(Source);
 sourcedrop.selectByValue("LEAD_EMPLOYEE");
-WebElement Marketing = driver.findElement(By.xpath("//span[text()='Marketing Campaign']"));
+WebElement Marketing = driver.findElement(By.xpath("//select[@id = 'marketingCampaignId']"));
 Select Marketdrop = new Select(Marketing);
 Marketdrop.selectByIndex(5);
-WebElement state = driver.findElement(By.xpath("//span[text()='State/Province']"));
+WebElement state = driver.findElement(By.xpath("//select[@name = 'generalStateProvinceGeoId']"));
 Select statedrop = new Select(state);
-statedrop.selectByValue("Texas"); 
+statedrop.selectByValue("TX"); 
 driver.findElement(By.xpath("//input[@type ='submit']")).click();
 }
 }
+
